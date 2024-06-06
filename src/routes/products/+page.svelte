@@ -1,66 +1,44 @@
-<script>
+<script lang="ts">
+  import { onMount } from "svelte";
   import Card from "../../components/Card/+Card.svelte";
+  import { supabase } from "../../server/supabase";
 
+  let products = [];
+  let filteredProducts: any[] | null = [];
+  let categories = [];
 
-  const products = [
-    {
-      name: "Pelota de Fútbol",
-      description: "Pelota de fútbol profesional de alta calidad.",
-      price: 29.99,
-      category: "deporte",
-    },
-    {
-      name: "Sofá Moderno",
-      description: "Sofá cómodo y elegante para tu sala de estar.",
-      price: 199.99,
-      category: "hogar",
-    },
-    {
-      name: "Pizza Margarita",
-      description: "Deliciosa pizza margarita con ingredientes frescos.",
-      price: 9.99,
-      category: "comida",
-    },
-    {
-      name: "Bicicleta de Montaña",
-      description: "Bicicleta de montaña con suspensión y frenos de disco.",
-      price: 349.99,
-      category: "deporte",
-    },
-    {
-      name: "Mesa de Comedor",
-      description: "Mesa de comedor de madera para 6 personas.",
-      price: 149.99,
-      category: "hogar",
-    },
-    {
-      name: "Hamburguesa Clásica",
-      description: "Hamburguesa clásica con queso, lechuga y tomate.",
-      price: 7.99,
-      category: "comida",
-    },
-    {
-      name: "Raqueta de Tenis",
-      description: "Raqueta de tenis de alta resistencia y durabilidad.",
-      price: 89.99,
-      category: "deporte",
-    },
-  ];
+  async function getProducts() {
+    let { data: Product, error } = await supabase
+      .from("Product")
+      .select(`*, Category(*)`);
 
-  let selectedCategory = "todas";
-  let filteredProducts = products;
-  
-  function filterProducts() {
-    console.log(selectedCategory,"selectedCategory")
-    if(selectedCategory === "todas") {
-      filteredProducts = products
-    }else{
-      filteredProducts = products.filter((product) => product.category === selectedCategory);
-
+    if (error) {
+      console.error(error);
+    } else {
+      filteredProducts = Product;
+      products = Product;
+      categories = Product.map((item) => item.Category).filter(
+        (category, index, data) =>
+          data.findIndex((val) => val.id === category.id) === index,
+      );
     }
   }
 
- 
+  onMount(() => {
+    getProducts();
+  });
+
+  let selectedCategory = "all";
+
+  function filterProducts() {
+    if (selectedCategory === "all") {
+      filteredProducts = products;
+    } else {
+      filteredProducts = products.filter(
+        (product) => product.Category.id === selectedCategory,
+      );
+    }
+  }
 </script>
 
 <svelte:head>
@@ -70,17 +48,26 @@
 
 <div>
   <div class="optionsForm">
-    <div class="wraperform" >
-      <a type="button" href="/products/form/registerOrder">Agregar Nueva Orden</a>
-      <a type="button" href="/products/form/registerProduct">Agregar Nuevo Producto</a>
+    <div class="wraperform">
+      <a type="button" href="/products/form/registerOrder"
+        >Agregar Nueva Orden</a
+      >
+      <a type="button" href="/products/form/registerProduct"
+        >Agregar Nuevo Producto</a
+      >
     </div>
     <div class="filter">
       <label for="category">Filtrar por categoría:</label>
-      <select id="category" bind:value={selectedCategory} on:change={filterProducts}>
-        <option value="todas">Todas</option>
-        <option value="deporte">Deporte</option>
-        <option value="hogar">Hogar</option>
-        <option value="comida">Comida</option>
+      <select
+        id="category"
+        bind:value={selectedCategory}
+        on:change={filterProducts}
+      >
+        <option value="all">Todo</option>
+
+        {#each categories as category}
+          <option value={category.id}>{category.name}</option>
+        {/each}
       </select>
     </div>
   </div>
@@ -103,12 +90,11 @@
     justify-content: center;
     padding: 16px;
   }
-  .wraperform{
+  .wraperform {
     display: flex;
     flex-direction: column;
   }
-  .optionsForm{
-    
+  .optionsForm {
     display: flex;
     gap: 2px;
     justify-content: space-around;

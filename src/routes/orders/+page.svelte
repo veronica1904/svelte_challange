@@ -1,5 +1,4 @@
 <script>
-    // Datos de ejemplo de pedidos
     const orders = [
       {
         id: 1,
@@ -36,7 +35,6 @@
       }
     ];
   
-    // Función para obtener la descripción de los productos y cantidades en un pedido
     function getOrderDetails(order) {
       return order.items.map(item => `${item.quantity} x ${item.productName}`).join(', ');
     }

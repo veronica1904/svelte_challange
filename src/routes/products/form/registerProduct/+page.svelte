@@ -1,34 +1,37 @@
-<script>
-    let quantity = 1;
-    let price = 0.0;
- 
-  
-    const products = [
-      { id: 1, name: 'Pelota de Fútbol' },
-      { id: 2, name: 'Sofá Moderno' },
-      { id: 3, name: 'Pizza Margarita' },
-      { id: 4, name: 'Bicicleta de Montaña' },
-      { id: 5, name: 'Mesa de Comedor' },
-      { id: 6, name: 'Hamburguesa Clásica' },
-      { id: 7, name: 'Raqueta de Tenis' }
-    ];
-  
-    const orders = [
-      { id: 1, name: 'Pedido 1' },
-      { id: 2, name: 'Pedido 2' },
-      { id: 3, name: 'Pedido 3' }
-    ];
-  
-    function handleSubmit(event) {
-      event.preventDefault();
-  
-      console.log('Cantidad:', quantity);
-      console.log('Precio:', price);
+<script lang='ts'>
+  import { onMount } from "svelte";
+  import { supabase } from "../../../../server/supabase";
+  import { goto } from '$app/navigation';
 
+    let name = '';
+    let price = 0;
+    let description = '';
+    let category = ''
+    let categories: any[] | null = []
+
+    onMount(async () => {
+      let { data } = await supabase.from("Category").select(`*`);
+      categories = data
+    })
   
+    async function handleSubmit(event) {
+      event.preventDefault();
+
+      let { data: Category } = await supabase.from("Category").select(`*`);
+
+      const { data, error } = await supabase
+        .from('Product')
+        .insert([
+          { name, price, description, category_id: category },
+        ])
+        .select()
+
       // Limpia el formulario después de enviar los datos
-      quantity = 1;
-      price = 0.0;
+      name = '';
+      price = 0;
+      description = '';
+
+      goto('/products')
     }
   </script>
   
@@ -36,12 +39,27 @@
     <h2>Añadir Nuevo Pedido</h2>
     <form on:submit={handleSubmit}>
       <label>
-        Cantidad:
-        <input type="number" min="1" bind:value={quantity} />
+        Nombre:
+        <input type="text" bind:value={name} />
       </label>
       <label>
         Precio:
-        <input type="number" step="0.01" bind:value={price} />
+        <input type="number" step="1" bind:value={price} />
+      </label>
+      <label>
+        descripción:
+        <textarea bind:value={description} />
+      </label>
+      <label>
+        Categoria:
+        <select
+        id="category"
+        bind:value={category}
+      >
+        {#each categories as category}
+        <option value={category.id}>{category.name}</option>
+        {/each}
+      </select>
       </label>
     
       <button type="submit">Agregar Pedido</button>
@@ -78,6 +96,7 @@
     }
   
     input,
+    textarea,
     select,
     button {
       margin-top: 5px;
