@@ -1,38 +1,38 @@
-# create-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+# Vero Storage
 
-## Creating a project
 
-If you're seeing this, you've probably already done this step. Congrats!
+Bienvenido a Vero Storage, una aplicación web sencilla donde puedes gestionar y visualizar productos, así como realizar pedidos detallados.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Descripción
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Este proyecto consiste en desarrollar una tienda en línea utilizando Svelte para el desarrollo del frontend, lo que permite una experiencia de usuario dinámica y reactiva. Se ha utilizado Supabase para la gestión de datos, proporcionando una base sólida y escalable para almacenar y consultar información. Además, se han utilizado librerías como TailwindCSS para el diseño y estilo, facilitando la creación de una interfaz de usuario moderna y responsiva.
 
-## Developing
+## Estructura de la Base de Datos
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+El diseño de la base de datos relacional incluye las siguientes entidades y sus relaciones:
 
-```bash
-npm run dev
+- **Categoría**: Almacena las diferentes categorías de productos.
+- **Producto**: Contiene información sobre los productos disponibles en la tienda. Cada producto está asociado a una categoría específica.
+- **Cliente**: Registra los datos de los clientes que pueden realizar pedidos.
+- **Pedido**: Almacena los pedidos realizados por los clientes.
+- **Proveedor**: Contiene información sobre los proveedores que suministran los productos.
+- **Order_Product**: Gestiona la relación de muchos a muchos entre pedidos y productos.
+- **Producto_Proveedor**: Maneja la relación de muchos a muchos entre productos y proveedores.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+![Diagrama de Base de datos](</src/lib/images/img_diagrama_db.png>)
 
-## Building
 
-To create a production version of your app:
+## Enlace al Proyecto Desplegado
 
-```bash
-npm run build
-```
+Puedes acceder a la versión desplegada de la aplicación a través del siguiente enlace: [Vero Storage](URL_DE_DESPLIEGUE).
 
-You can preview the production build with `npm run preview`.
+## Iniciar proyecto en desarrollo
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Version node 18 
+instalar dependencia: npm install
+correr proyecto: npm run dev
+
+
+
+¡Gracias por visitar nuestra tienda de productos! Esperamos que disfrutes utilizando la aplicación tanto como nosotros disfrutamos desarrollándola.

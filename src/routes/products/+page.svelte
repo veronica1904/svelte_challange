@@ -49,12 +49,23 @@
 <div>
   <div class="flex flex-col lg:flex-row gap-2 justify-around mb-4">
     <div class="flex flex-col">
-      <a class="mb-2 bg-orange-500 text-white p-2 rounded hover:bg-orange-400" href="/products/form/registerOrder">Agregar Nueva Orden</a>
-      <a class="bg-orange-500 text-white p-2 rounded hover:bg-orange-400" href="/products/form/registerProduct">Agregar Nuevo Producto</a>
+      <a
+        class="mb-2 bg-primary-main text-white p-2 rounded hover:bg-red-500"
+        href="/products/form/registerOrder">Agregar Nueva Orden</a
+      >
+      <a
+        class="bg-primary-main text-white p-2 rounded hover:bg-red-500"
+        href="/products/form/registerProduct">Agregar Nuevo Producto</a
+      >
     </div>
     <div class="flex items-center justify-center">
       <label for="category" class="mr-2 text-lg">Filtrar por categoría:</label>
-      <select id="category" bind:value={selectedCategory} on:change={filterProducts} class="p-2 text-base border border-gray-300 rounded">
+      <select
+        id="category"
+        bind:value={selectedCategory}
+        on:change={filterProducts}
+        class="p-2 text-base border border-gray-300 rounded"
+      >
         <option value="all">Todo</option>
         {#each categories as category}
           <option value={category.id}>{category.name}</option>
@@ -68,7 +79,7 @@
         name={product.name}
         description={product.description}
         price={product.price}
-        category={product.category}
+        category={product.Category?.name}
       />
     {/each}
   </div>

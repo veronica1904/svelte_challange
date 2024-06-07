@@ -12,8 +12,8 @@
     {category}
   </div>
   <div class="mb-4">
-    <h2 class="text-xl font-bold mb-2 text-[#333]">{name}</h2>
-    <p class="text-[#666] text-base truncate">{description}</p>
+    <h2 class="text-xl font-bold mb-2 text-[#333333]">{name}</h2>
+    <p class="text-[#666666] text-base truncate">{description}</p>
   </div>
   <div class="text-lg text-[#27ae60] font-bold mt-auto">
     ${price}

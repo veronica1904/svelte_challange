@@ -12,6 +12,6 @@
 	</main>
 
 	<footer class="flex flex-col justify-center items-center p-3 sm:p-3 sm:py-0">
-		<p>En nuestra no busques productos busca detalles para regalar o regalarte!</p>
+		<p>En nuestra nuestra tienda no busques productos... Busca detalles para regalar o regalarte!</p>
 	</footer>
 </div>
