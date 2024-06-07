@@ -5,50 +5,17 @@
   export let category;
 </script>
 
-<style>
-  .card {
-    max-width: 300px;
-    padding: 16px;
-    margin: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    transition: box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .card h2 {
-    margin: 0 0 8px;
-    font-size: 1.5em;
-    color: #333333;
-  }
-
-  .card p {
-    margin: 0 0 16px;
-    color: #666666;
-  }
-
-  .card .price {
-    font-size: 1.2em;
-    color: #27ae60;
-    font-weight: bold;
-  }
-   .category {
-    font-size: 0.9em;
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-bottom: 8px;
-    color: #ff3e00;
-  }
-</style>
-
-<div class="card">
-    <div class="category">{category}</div>
-        <h2>{name}</h2>
-        <p>{description}</p>
-    <div class="price">${price}</div>
+<div
+  class="card flex flex-col justify-between p-4 border border-gray-300 rounded shadow-md w-60 h-60 max-w-[300px] bg-white transition-shadow duration-300 ease-in-out hover:shadow-lg"
+>
+  <div class="text-sm p-1.5 rounded inline-block mb-2 text-[#ff3e00]">
+    {category}
+  </div>
+  <div class="mb-4">
+    <h2 class="text-xl font-bold mb-2 text-[#333]">{name}</h2>
+    <p class="text-[#666] text-base truncate">{description}</p>
+  </div>
+  <div class="text-lg text-[#27ae60] font-bold mt-auto">
+    ${price}
+  </div>
 </div>

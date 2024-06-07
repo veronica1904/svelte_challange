@@ -68,29 +68,29 @@
   }
 </script>
 
-<div class="form-container">
-  <h2>Añadir Nuevo Pedido</h2>
-  <form on:submit={handleSubmit}>
-    <label>
+<div class="max-w-xs mx-auto p-4 bg-white rounded-lg shadow-md text-center">
+  <h2 class="mb-4">Añadir Nuevo Pedido</h2>
+  <form on:submit={handleSubmit} class="flex flex-col items-center">
+    <label class="flex flex-col items-start mb-4 w-full">
       Cantidad:
-      <input type="number" min="1" bind:value={quantity} />
+      <input type="number" min="1" bind:value={quantity} class="mt-1 p-2 w-full border rounded-md" />
     </label>
-    <label>
+    <label class="flex flex-col items-start mb-4 w-full">
       Precio:
-      <input type="number" step="0.01" bind:value={price} />
+      <input type="number" step="0.01" bind:value={price} class="mt-1 p-2 w-full border rounded-md" />
     </label>
-    <label>
+    <label class="flex flex-col items-start mb-4 w-full">
       Producto:
-      <select bind:value={selectedProduct}>
+      <select bind:value={selectedProduct} class="mt-1 p-2 w-full border rounded-md">
         <option value="" disabled selected>Selecciona un producto</option>
         {#each products as product}
           <option value={product.id}>{product.name}</option>
         {/each}
       </select>
     </label>
-    <label>
+    <label class="flex flex-col items-start mb-4 w-full">
       Pedido:
-      <select id="order" bind:value={selectedOrder}>
+      <select id="order" bind:value={selectedOrder} class="mt-1 p-2 w-full border rounded-md">
         <option value="" disabled selected>Selecciona un pedido</option>
         {#each orders as order}
           <option value={order.id}>{order.name}</option>
@@ -98,60 +98,7 @@
       </select>
     </label>
 
-    <button type="submit">Agregar Pedido</button>
+    <button type="submit" class="mt-2 py-2 px-4 bg-[#ff3e00] text-white rounded-md border border-transparent hover:bg-[#d1dce9] transition duration-300 ease-in-out">Agregar Pedido</button>
   </form>
 </div>
 
-<style>
-  .form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-
-  h2 {
-    margin-bottom: 20px;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    width: 100%;
-  }
-
-  input,
-  select,
-  button {
-    margin-top: 5px;
-    padding: 10px;
-    font-size: 1em;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  button {
-    background-color: #ff3e00;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  button:hover {
-    background-color: #d1dce9;
-  }
-</style>

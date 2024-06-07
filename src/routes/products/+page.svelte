@@ -47,31 +47,22 @@
 </svelte:head>
 
 <div>
-  <div class="optionsForm">
-    <div class="wraperform">
-      <a type="button" href="/products/form/registerOrder"
-        >Agregar Nueva Orden</a
-      >
-      <a type="button" href="/products/form/registerProduct"
-        >Agregar Nuevo Producto</a
-      >
+  <div class="flex flex-col lg:flex-row gap-2 justify-around mb-4">
+    <div class="flex flex-col">
+      <a class="mb-2 bg-orange-500 text-white p-2 rounded hover:bg-orange-400" href="/products/form/registerOrder">Agregar Nueva Orden</a>
+      <a class="bg-orange-500 text-white p-2 rounded hover:bg-orange-400" href="/products/form/registerProduct">Agregar Nuevo Producto</a>
     </div>
-    <div class="filter">
-      <label for="category">Filtrar por categoría:</label>
-      <select
-        id="category"
-        bind:value={selectedCategory}
-        on:change={filterProducts}
-      >
+    <div class="flex items-center justify-center">
+      <label for="category" class="mr-2 text-lg">Filtrar por categoría:</label>
+      <select id="category" bind:value={selectedCategory} on:change={filterProducts} class="p-2 text-base border border-gray-300 rounded">
         <option value="all">Todo</option>
-
         {#each categories as category}
           <option value={category.id}>{category.name}</option>
         {/each}
       </select>
     </div>
   </div>
-  <div class="wrapperCardProducts">
+  <div class="flex flex-wrap justify-center gap-4 p-4">
     {#each filteredProducts as product}
       <Card
         name={product.name}
@@ -82,38 +73,3 @@
     {/each}
   </div>
 </div>
-
-<style>
-  .wrapperCardProducts {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 16px;
-  }
-  .wraperform {
-    display: flex;
-    flex-direction: column;
-  }
-  .optionsForm {
-    display: flex;
-    gap: 2px;
-    justify-content: space-around;
-  }
-
-  .filter {
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .filter label {
-    margin-right: 8px;
-    font-size: 1.2em;
-  }
-
-  .filter select {
-    padding: 4px 8px;
-    font-size: 1em;
-  }
-</style>
