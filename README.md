@@ -25,7 +25,7 @@ El diseño de la base de datos relacional incluye las siguientes entidades y sus
 
 ## Enlace al Proyecto Desplegado
 
-Puedes acceder a la versión desplegada de la aplicación a través del siguiente enlace: [Vero Storage](URL_DE_DESPLIEGUE).
+Puedes acceder a la versión desplegada de la aplicación a través del siguiente enlace: [Vero Storage](sveltechallangevero-veronica1904s-projects.vercel.app).
 
 ## Iniciar proyecto en desarrollo
 
